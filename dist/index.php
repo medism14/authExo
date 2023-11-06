@@ -13,7 +13,7 @@
     <div class="flex-2 flex items-center justify-center md:px-10 font-bold text-2xl text-gray-100">Authentification</div>
     <div class="flex-1 flex justify-end items-center justify-center md:justify-end mt-1 md:mt-0 px-10">
       <ul class="flex space-x-6">
-        <li><a href="/" class="text-gray-300 font-bold">Connexion</a></li>
+        <li><a href="index.php" class="text-gray-300 font-bold">Connexion</a></li>
         <li><a href="inscription.php" class="text-gray-300 font-bold">Inscription</a></li>
       </ul>
     </div>
