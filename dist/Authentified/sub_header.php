@@ -37,7 +37,7 @@
     <?php 
 
     if (!$_SESSION['connection']){
-      header('location: ../index.php');
+      header('location: ../../index.php');
       exit;
     }
 
@@ -47,7 +47,7 @@
 
       session_destroy();
 
-      header('location:../index.php');
+      header('location:../../index.php');
     }
   ?>
 

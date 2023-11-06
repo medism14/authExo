@@ -76,11 +76,13 @@ if (isset($_SESSION['success']))
 {
   unset($_SESSION['success']);
 }
-    if ($_SESSION['connection']){
+    if ($_SESSION['connection'])
+    {
       header('location: Authentified/index.php');
     }
   //ici s'il est co
-  if(isset($_POST['submitted'])){
+  if(isset($_POST['submitted']))
+  {
     try
     {
       $pdo = new PDO("mysql:host=127.0.0.1;dbname=test", 'root', '123');
