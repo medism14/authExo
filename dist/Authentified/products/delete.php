@@ -2,7 +2,7 @@
 	if(isset($_GET['id']))
 	{
 		session_start();
-		$pdo = new PDO('mysql:hostname=127.0.0.1;dbname=test', 'root', '123');
+		include('../../bdd.php');
 		$id = $_GET['id'];
 		$sql = "DELETE FROM produits WHERE id_produit = :id";
 		$stmt = $pdo->prepare($sql);

@@ -7,9 +7,10 @@ if(isset($_POST['submitted'])){
     $date_up = $_POST['date_up'];
     $designation = $_POST['designation'];
     $prix = $_POST['prix'];
+    $quantite = $_POST['quantite'];
     $categorie = $_POST['categorie'];
 
-    $sql = "INSERT INTO produits (date_in, date_up, designation, prix, categorie) VALUES (:date_in, :date_up, :designation, :prix, :categorie)";
+    $sql = "INSERT INTO produits (date_in, date_up, designation, prix, quantite, categorie) VALUES (:date_in, :date_up, :designation, :prix, :quantite, :categorie)";
     $stmt = $pdo->prepare($sql);
 
     // Bind the parameters without colon
@@ -17,6 +18,7 @@ if(isset($_POST['submitted'])){
     $stmt->bindParam('date_up', $date_up);
     $stmt->bindParam('designation', $designation, PDO::PARAM_STR);
     $stmt->bindParam('prix', $prix, PDO::PARAM_STR);
+    $stmt->bindParam('quantite', $quantite);
     $stmt->bindParam('categorie', $categorie, PDO::PARAM_STR);
 
     $stmt->execute();
@@ -93,6 +95,12 @@ if(isset($_POST['submitted'])){
             </select>
           </div>
         </div>
+        <div class="lg:flex-1 lg:flex justify-center">
+          <div class="group">
+            <label for="quantite" class="block text-gray-800 text-md font-bold mb-2">Quantité</label>
+            <input type="number" id="quantite" name="quantite" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+        </div>
       </div>
 
       <div class="flex justify-center gap-2 mt-5">
@@ -110,7 +118,7 @@ if(isset($_POST['submitted'])){
 
 
 
-<?php include('../footer.php'); ?>
+<?php include('../sub_footer.php'); ?>
 
 
 <script>

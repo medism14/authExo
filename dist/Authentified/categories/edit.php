@@ -59,7 +59,7 @@
   </section>
 
 
-<?php include('../footer.php'); ?>
+<?php include('../sub_footer.php'); ?>
 
 
 

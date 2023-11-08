@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   $(document).ready(function() {
       setTimeout(function() {
           $('#display_message').fadeOut('slow');
-          fetch('unsetDisplayMessage.php')
+          fetch('../unsetDisplayMessage.php')
           .then(response => response.json())
           .catch(error => console.error('Error: ', error));
       }, 3000);

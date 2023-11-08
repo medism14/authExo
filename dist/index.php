@@ -85,8 +85,7 @@ if (isset($_SESSION['success']))
   {
     try
     {
-      $pdo = new PDO("mysql:host=127.0.0.1;dbname=test", 'root', '123');
-
+      include('bdd.php');
       $email = $_POST['email'];
       $password = $_POST['password'];
 
@@ -100,6 +99,8 @@ if (isset($_SESSION['success']))
 
       $first_name = $result['first_name'];
       $last_name = $result['last_name'];
+      $type = $result['type'];
+      $id_user = $result['id'];
 
       if ($result['first_name'] == null)
       {
@@ -108,8 +109,10 @@ if (isset($_SESSION['success']))
       else
       {
         $_SESSION['connection'] = true;
+        $_SESSION['id_user'] = $id_user;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
+        $_SESSION['type'] = $type;
         header('Location: Authentified/index.php');
         exit();
       }

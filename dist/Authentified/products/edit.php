@@ -5,6 +5,7 @@
     $id = $_GET['id'];
     $designation = $_POST['designation'];
     $prix = $_POST['prix'];
+    $quantite = $_POST['quantite'];
     $date_in = $_POST['date_in'];
     $date_up = $_POST['date_up'];
     $categorie = $_POST['categorie'];
@@ -20,6 +21,12 @@
     $stmt_prix->bindParam('prix', $prix);
     $stmt_prix->bindParam('id', $id);
     $stmt_prix->execute();
+
+    $sql_quantite = "UPDATE produits SET quantite = :quantite WHERE id_produit = :id";
+    $stmt_quantite = $pdo->prepare($sql_quantite);
+    $stmt_quantite->bindParam('quantite', $quantite);
+    $stmt_quantite->bindParam('id', $id);
+    $stmt_quantite->execute();
 
     $sql_date_in = "UPDATE produits SET date_in = :date_in WHERE id_produit = :id";
     $stmt_date_in = $pdo->prepare($sql_date_in);
@@ -39,14 +46,7 @@
     $stmt_categorie->bindParam('id', $id);
     $stmt_categorie->execute();
 
-/*    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':designation', $designation);
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':prix', $prix);
-    $stmt->bindParam(':date_in', $date_in);
-    $stmt->bindParam(':date_out', $date_out);
-    $stmt->bindParam(':categorie', $categorie);
-    $stmt->execute();*/
+
     
     $_SESSION['display_message'] = '<span class="text-green-600 underline">La categorie a bien été modifiée</span>';
     header('location: index.php');
@@ -58,7 +58,7 @@
 </div>
 <?php 
   $id = $_GET['id'];
-  $sql = "SELECT produits.designation as prod_designation, categorie.designation as cat_designation, prix, date_in, date_up, categorie, id_categorie, id_produit FROM produits, categorie WHERE id_produit = :id";
+  $sql = "SELECT produits.designation as prod_designation, categorie.designation as cat_designation, prix, quantite, date_in, date_up, categorie, id_categorie, id_produit FROM produits, categorie WHERE id_produit = :id";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam('id', $id);
   $stmt->execute();
@@ -136,6 +136,12 @@
             </select>
           </div>
         </div>
+        <div class="lg:flex-1 lg:flex justify-center">
+          <div class="group">
+            <label for="quantite" class="block text-gray-800 text-md font-bold mb-2">Quantité</label>
+            <input type="number" value="<?php echo $result['quantite'] ?>" id="quantite" name="quantite" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+        </div>
       </div>
 
       <div class="flex justify-center gap-2 mt-5">
@@ -151,7 +157,7 @@
   </section>
 
 
-<?php include('../footer.php'); ?>
+<?php include('../sub_footer.php'); ?>
 
 <script>
 //Réinitialiser le form

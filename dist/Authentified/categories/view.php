@@ -3,7 +3,7 @@
 	function fetchData($id) 
 	{
 		session_start();
-		$pdo = new PDO('mysql:host=127.0.0.1;dbname=test', 'root', '123');
+		include('../../bdd.php');
 		$sql = "SELECT produits.* 
             FROM produits,categorie 
             WHERE produits.categorie = categorie.id_categorie

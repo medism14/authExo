@@ -92,7 +92,7 @@
 
 
 <?php 
-$pdo = new PDO("mysql:host=127.0.0.1;dbname=test", 'root', '123');
+include('bdd.php');
 
 if (isset($_SESSION['success']))
 {
@@ -105,6 +105,7 @@ if (isset($_SESSION['success']))
   			$last_name = $_POST['last_name'];
   			$email = $_POST['email'];
   			$password = $_POST['password'];
+        $type = 1;
 
         $sql = "SELECT * FROM users";
         $stmt = $pdo->query($sql);
@@ -125,11 +126,12 @@ if (isset($_SESSION['success']))
         }
         else 
         {
-          $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
+          $sql = "INSERT INTO users (first_name, last_name, type, email, password) VALUES (:first_name, :last_name, :type, :email, :password)";
           $stmt = $pdo->prepare($sql);
 
           $stmt->bindParam(':first_name', $first_name);
           $stmt->bindParam(':last_name', $last_name);
+          $stmt->bindParam(':type', $type);
           $stmt->bindParam(':email', $email);
           $stmt->bindParam(':password', $password);
 
