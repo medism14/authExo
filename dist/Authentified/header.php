@@ -34,25 +34,30 @@
         <li><a href="products/index.php" class="text-gray-100 font-bold text-md hover:bg-yellow-600 px-5 py-3 rounded transition duration-300 ease-in-out" id="produits">Produits</a></li>
         <li class="relative group">
           <span class="text-white font-bold px-5 py-6 rounded transition duration-300 ease-in-out cursor-pointer">Panier <i class="fa fa-shopping-cart"></i></span>
-          <ul class="absolute hidden bg-gray-300 text-black w-[400%] group-hover:block mt-5 left-1/2 -translate-x-1/2">
+          <ul class="absolute hidden bg-gray-300 p-2 rounded-md text-black w-[400%] group-hover:block mt-5 left-1/2 -translate-x-1/2 z-50">
+            <span class="w-full flex justify-center underline mb-5 mt-3 font-bold">Panier</span>
             <?php 
             $i = 1;
               include('../bdd.php');
               $user = $_SESSION['id_user'];
 
-              $sql = "SELECT panier.id, produits.* FROM panier JOIN produits on panier.id_produit = produits.id_produit WHERE id_user = :user";
+              $sql = "SELECT panier.id, panier.quantite as quantity, produits.* FROM panier JOIN produits on panier.id_produit = produits.id_produit WHERE id_user = :user";
               $stmt = $pdo->prepare($sql);
               $stmt->bindParam('user', $user);
               $stmt->execute();
               $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+              if ($result == null)
+              {
+                echo '<span class="text-center block font-bold text-xl text-gray-600">(Vide)</span>';
+              }
+
               foreach ($result as $r)
               {
                 ?>
-            <li class="relative">
-              <span class="w-full flex justify-center underline mb-5 font-bold">Panier</span>
+             <li class="mb-1">
               <div class="relative">
-                <span class="block px-4 py-3 hover:bg-gray-300"><?php echo($i . ' | ' . $r['designation'] . ' x ' . $r['quantity']) ?> </span>
+                <span class="block px-4 py-3 hover:bg-gray-300 mb-5"><?php echo($i . ' | ' . $r['designation'] . ' x ' . $r['quantity']) ?> </span>
                 <button id="removePanier<?php echo($r['id']) ?>" class="absolute right-0 top-0 p-3 hover:bg-red-500 rounded-md transition duration-200 ease-in-out cursor-pointer"><i class="fa fa-trash"></i></button>
               </div>
             </li>
