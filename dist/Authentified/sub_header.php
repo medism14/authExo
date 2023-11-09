@@ -58,7 +58,7 @@
                 ?>
              <li class="mb-1">
               <div class="relative">
-                <span class="block px-4 py-3 hover:bg-gray-300 mb-5"><?php echo($i . ' | ' . $r['designation'] . ' x ' . $r['quantity']) ?> </span>
+                <span class="block px-4 py-3 hover:bg-gray-400 mb-2"><?php echo($i . ' | ' . $r['designation'] . ' x ' . $r['quantity']) ?> </span>
                 <button id="removePanier<?php echo($r['id']) ?>" class="absolute right-0 top-0 p-3 hover:bg-red-500 rounded-md transition duration-200 ease-in-out cursor-pointer"><i class="fa fa-trash"></i></button>
               </div>
             </li>
