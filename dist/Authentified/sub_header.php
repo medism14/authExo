@@ -39,7 +39,6 @@
             <span class="w-full flex justify-center underline mb-5 mt-3 font-bold">Panier</span>
             <?php 
             $i = 1;
-              include('../bdd.php');
               $user = $_SESSION['id_user'];
 
               $sql = "SELECT panier.id, panier.quantite as quantity, produits.* FROM panier JOIN produits on panier.id_produit = produits.id_produit WHERE id_user = :user";
